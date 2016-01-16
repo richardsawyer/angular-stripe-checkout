@@ -53,12 +53,13 @@ function StripeCheckoutDirective($parse, StripeCheckout) {
   function link(scope, el, attrs) {
     var handler;
 
-    StripeCheckout.load()
-      .then(function() {
-        handler = StripeCheckout.configure(getOptions(el));
-      });
+    StripeCheckout.load();
+      // .then(function() {
+      //   handler = StripeCheckout.configure(getOptions(el));
+      // });
 
     el.on("click",function() {
+      handler = StripeCheckout.configure(getOptions(el));
       if (handler)
         handler.open(getOptions(el)).then(function(result) {
           var callback = $parse(attrs.stripeCheckout)(scope);
